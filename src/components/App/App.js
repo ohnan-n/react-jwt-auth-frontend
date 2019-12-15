@@ -127,7 +127,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className = "main">
         <NavBar isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
         <div className='body'>
           <Switch>

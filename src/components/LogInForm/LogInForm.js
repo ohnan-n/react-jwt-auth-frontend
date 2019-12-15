@@ -6,7 +6,7 @@ class LogInForm extends Component {
   render () {
     return (
       <div>
-        <h2>Log In</h2>
+        <h2>Door</h2>
 
         <form>
           <div>

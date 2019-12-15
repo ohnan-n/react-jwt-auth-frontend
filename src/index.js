@@ -4,8 +4,11 @@ import App from './components/App/App'
 import {BrowserRouter as Router} from 'react-router-dom'
 
 ReactDOM.render(
-    <Router>
+    <div className = "home">
+    <Router >
         <App />
-    </Router>,
+    </Router>
+   </div> 
+    ,
     document.getElementById('root')
 )
