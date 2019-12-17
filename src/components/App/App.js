@@ -11,12 +11,17 @@ import SignUpForm from '../SignUpForm/SignUpForm'
 import LogInForm from '../LogInForm/LogInForm'
 import LogOut from '../LogOut/LogOut'
 import Profile from '../Profile/Profile'
+import Journal from '../Journal/Journal'
+import Calendar from '../Calendar/Calendar'
+import Mood from '../Mood/Mood'
+
 import './App.css'
 
 const databaseUrl = process.env.NODE_ENV === 'production' ? process.env.BACKEND_APP_URL : 'http://localhost:3000'
 
 class App extends Component {
   state = {
+    username: '',
     email: '',
     password: '',
     isLoggedIn: false,
@@ -55,6 +60,22 @@ class App extends Component {
     // }
   }
 
+  addNewJournal = journal => {
+    console.log(journal)
+    let user = JSON.parse(window.localStorage.user)
+    console.log(user)
+    journal.user = user._id
+
+    axios({
+      url: `${databaseUrl}/api/journals`,
+      method: 'POST',
+      data: journal
+    })
+    .then(newJournal => {
+      console.log(newJournal)
+    })
+  }
+
   handleLogOut = (e) => {
     e.preventDefault()
     window.localStorage.clear()
@@ -75,6 +96,7 @@ class App extends Component {
   handleSignUp = (e) => {
     e.preventDefault()
     let newUser = {
+      username: this.state.username,
       email: this.state.email,
       password: this.state.password
     }
@@ -110,6 +132,7 @@ class App extends Component {
       .then(response => {
         console.log(response)
         window.localStorage.setItem('token', response.data.token)
+        window.localStorage.setItem('user', JSON.stringify(response.data.user))
         this.setState({
           isLoggedIn: true,
           user: response.data.user,
@@ -155,7 +178,28 @@ class App extends Component {
             <Route path='/profile'
               render={(props) => {
                 return (
-                  <Profile isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
+                  <Profile isLoggedIn={this.state.isLoggedIn} user={this.state.user}/>
+                )
+              }}
+            />
+            <Route path='/journal'
+              render={(props) => {
+                return (
+                  <Journal isLoggedIn={this.state.isLoggedIn} user={this.state.user} addNewJournal={this.addNewJournal}/>
+                )
+              }}
+            />
+            <Route path='/mood'
+              render={(props) => {
+                return (
+                  <Mood isLoggedIn={this.state.isLoggedIn} user={this.state.user}/>
+                )
+              }}
+            />
+            <Route path='/calendar'
+              render={(props) => {
+                return (
+                  <Calendar isLoggedIn={this.state.isLoggedIn} user={this.state.user}/>
                 )
               }}
             />

@@ -5,18 +5,21 @@ import './SignUpForm.css'
 class SignUpForm extends Component {
   render () {
     return (
-      <div>
-        <h2>Sign Up</h2>
+      <div className="register">
+        <h1>Sign Up</h1>
 
         <form>
-          <div>
+        <div className="userName">
+            <label >Username</label>
+            <input type='text' name='username' onChange={this.props.handleInput} />
+          </div>
+          <div className="regEmail">
             <label htmlFor='email'>Email</label>
             <input type='text' name='email' onChange={this.props.handleInput} />
           </div>
-
-          <div>
+          <div className="regPass">
             <label htmlFor='password'>Password</label>
-            <input type='text' name='password' onChange={this.props.handleInput} />
+            <input id="passInput" type='text' name='password' onChange={this.props.handleInput} />
           </div>
           <input value='Submit' type='submit' onClick={this.props.handleSignUp} />
         </form>

@@ -4,11 +4,17 @@ import './Profile.css'
 class Profile extends Component {
   
   render() {
+    console.log(this.props)
     if (this.props.user != null) {
       return (
         <div>
-          <h4>{this.props.user.email}</h4>
-          <h4>What up</h4>
+  
+          <h4> Welcome, {this.props.user.username} </h4>
+          <div>
+          <button><i class="large material-icons">book</i></button>
+          <button><i class="large material-icons">event_note</i></button>
+         <button> <i class="large material-icons">mood</i></button>
+          </div>
         </div>
       )
     } else {
