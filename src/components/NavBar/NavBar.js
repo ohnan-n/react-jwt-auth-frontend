@@ -5,7 +5,7 @@ import './NavBar.css'
 class NavBar extends Component {
 
   render() {
-    let navBarItems = [<NavItem key={1} href='/'>Home</NavItem>]
+  let navBarItems = [<NavItem key={1} href='/'> Home</NavItem>]
     if (this.props.isLoggedIn) {
       navBarItems.push(<NavItem key={2} href='/logout'>Log Out</NavItem>)
       if (this.props.user != null) {

@@ -28,6 +28,10 @@ class Journal extends Component {
   render() {
     console.log(this.state)
     console.log("on the journal page")
+    console.log(this.props.userJournals)
+    let userJournals = this.props.userJournals.map((userJournal =>{
+      return  <div key={userJournal._id} >{userJournal.entry} </div>
+    }))
     return (
       <div>
         <h1>Vent</h1>
@@ -53,6 +57,7 @@ class Journal extends Component {
                 </div>
           <input value='Submit' type='submit' />
         </form>
+        {userJournals}
         </div>
     )
   }

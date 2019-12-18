@@ -25,7 +25,8 @@ class App extends Component {
     email: '',
     password: '',
     isLoggedIn: false,
-    user: null
+    user: null,
+    userJournals: []
   }
 
   componentDidMount() {
@@ -61,6 +62,7 @@ class App extends Component {
   }
 
   addNewJournal = journal => {
+
     console.log(journal)
     let user = JSON.parse(window.localStorage.user)
     console.log(user)
@@ -71,8 +73,26 @@ class App extends Component {
       method: 'POST',
       data: journal
     })
-    .then(newJournal => {
-      console.log(newJournal)
+    .then(response => { 
+      console.log(response)
+      this.getJournal()
+    })
+    .catch(error => {
+      console.log(error.response)
+    })
+  }
+
+  getJournal = journalEntieies => {
+    console.log('getJournal')
+    axios({
+      url: `${databaseUrl}/api/journals`,
+      method: 'GET'
+    })
+    .then(userJournals => {
+      this.setState({ userJournals: userJournals.data})
+    })
+    .catch(error => {
+      console.log(error)
     })
   }
 
@@ -137,7 +157,8 @@ class App extends Component {
           isLoggedIn: true,
           user: response.data.user,
           email: '',
-          password: ''
+          password: '',
+          userJournals: response.data.userJournals
         })
         const location = {
           pathname: '/profile',
@@ -185,7 +206,7 @@ class App extends Component {
             <Route path='/journal'
               render={(props) => {
                 return (
-                  <Journal isLoggedIn={this.state.isLoggedIn} user={this.state.user} addNewJournal={this.addNewJournal}/>
+                  <Journal isLoggedIn={this.state.isLoggedIn} user={this.state.user} addNewJournal={this.addNewJournal} userJournals={this.state.userJournals}/>
                 )
               }}
             />
