@@ -1,12 +1,12 @@
 *{
   text-align: center;
-  font-family: 'Chewy', cursive;
+  font-family: 'Titan One', cursive;
 }
 
 body {
   width:100%;
   height: 100%;
-  background: linear-gradient(90deg, #ccffd7,#8fb8ff, #24AADB , #27DBB1, rgb(199, 240, 231));
+  background: linear-gradient(90deg, #64ffda , #b388ff, #651fff, #27DBB1, #a7ffeb);
   background-size: 600% 100%;
   animation: gradient 20s linear infinite;
   animation-direction: alternate;  
@@ -15,6 +15,16 @@ body {
 @keyframes gradient {
   0% {background-position: 0%}
   100% {background-position: 100%}
+}
+
+.slime {
+  width: 50%;
+  height: 47%;
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 

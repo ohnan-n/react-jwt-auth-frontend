@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import './Profile.css'
+// import './Profile.css'
+
 
 class Profile extends Component {
   
@@ -9,6 +10,7 @@ class Profile extends Component {
         <div>
           <h4>{this.props.user.email}</h4>
           <h4>What up</h4>
+
         </div>
       )
     } else {
