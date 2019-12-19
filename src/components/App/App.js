@@ -12,7 +12,7 @@ import LogInForm from '../LogInForm/LogInForm'
 import LogOut from '../LogOut/LogOut'
 import Profile from '../Profile/Profile'
 import Journal from '../Journal/Journal'
-import Calendar from '../Calendar/Calendar'
+import Calendar from '../Calendar/Cal'
 import Mood from '../Mood/Mood'
 
 import './App.css'
@@ -82,7 +82,7 @@ class App extends Component {
     })
   }
 
-  getJournal = journalEntieies => {
+  getJournal = journalEntries => {
     console.log('getJournal')
     axios({
       url: `${databaseUrl}/api/journals`,
@@ -158,7 +158,7 @@ class App extends Component {
           user: response.data.user,
           email: '',
           password: '',
-          userJournals: response.data.userJournals
+          userJournals: response.data.user.journals
         })
         const location = {
           pathname: '/profile',
@@ -170,6 +170,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className = "main">
         <NavBar isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
@@ -199,7 +200,7 @@ class App extends Component {
             <Route path='/profile'
               render={(props) => {
                 return (
-                  <Profile isLoggedIn={this.state.isLoggedIn} user={this.state.user}/>
+                  <Profile isLoggedIn={this.state.isLoggedIn} user={this.state.user} userJournals={this.state.userJournals}/>
                 )
               }}
             />

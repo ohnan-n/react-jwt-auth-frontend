@@ -1,6 +1,14 @@
 form {
     margin: 0 30% 0 30%;
 }
+.username label {
+  color: white;
+  border-color: white;
+}
+
+.username input[type="text"]:focus + label {
+  color: white;
+}
 .regEmail label {
     color: white;
     border-color: white;

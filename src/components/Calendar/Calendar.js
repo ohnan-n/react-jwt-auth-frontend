@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactCalendar from 'react-calendar'
-import './Calendar.css'
+import './Calendar.scss'
 
 class Calendar extends Component {
 
@@ -13,10 +13,13 @@ class Calendar extends Component {
   render() {
     return (
       <div>
-        <ReactCalendar
+        <div className="calendar-rectangle">
+          <div id="calendar-content" className="calendar-content"></div>
+        </div>
+        {/* <ReactCalendar
           onChange={this.onChange}
           value={this.state.date}
-        />
+        /> */}
       </div>
     );
   }

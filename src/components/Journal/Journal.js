@@ -30,7 +30,7 @@ class Journal extends Component {
     console.log("on the journal page")
     console.log(this.props.userJournals)
     let userJournals = this.props.userJournals.map((userJournal =>{
-      return  <div key={userJournal._id} >{userJournal.entry} </div>
+      return  <div key={userJournal._id}>{userJournal.entry}</div>
     }))
     return (
       <div>

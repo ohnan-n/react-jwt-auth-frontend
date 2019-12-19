@@ -11,7 +11,7 @@ class Profile extends Component {
     const location = {
       pathname: '/journal'
     }
-    this.props.history.replace(location)
+    this.props.history.push(location)
   }
   sendToMood= e => {
     e.preventDefault()

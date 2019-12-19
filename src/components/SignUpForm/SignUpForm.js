@@ -10,7 +10,7 @@ class SignUpForm extends Component {
 
         <form>
         <div className="userName">
-            <label >Username</label>
+            <label htmlFor='username'>Username</label>
             <input type='text' name='username' onChange={this.props.handleInput} />
           </div>
           <div className="regEmail">
