@@ -6,6 +6,7 @@ import './SignUpForm.css'
 class SignUpForm extends Component {
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <Row>
           <Col m={6} s={12}>
@@ -26,6 +27,26 @@ class SignUpForm extends Component {
             </CardPanel>
           </Col>
         </Row>
+=======
+      <div className="register">
+        <h1>Sign Up</h1>
+
+        <form>
+        <div className="userName">
+            <label >Username</label>
+            <input type='text' name='username' onChange={this.props.handleInput} />
+          </div>
+          <div className="regEmail">
+            <label htmlFor='email'>Email</label>
+            <input type='text' name='email' onChange={this.props.handleInput} />
+          </div>
+          <div className="regPass">
+            <label htmlFor='password'>Password</label>
+            <input id="passInput" type='text' name='password' onChange={this.props.handleInput} />
+          </div>
+          <input value='Submit' type='submit' onClick={this.props.handleSignUp} />
+        </form>
+>>>>>>> 48c5aad302b2b9022a700a3e612a5063b034b7a2
       </div>
     )
   }

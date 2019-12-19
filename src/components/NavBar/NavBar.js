@@ -7,6 +7,7 @@ import './NavBar.css'
 class NavBar extends Component {
 
   render() {
+<<<<<<< HEAD
     let navBarItems = [<Button 
         className="#76ff03 light-green accent-3"
         floating
@@ -18,6 +19,9 @@ class NavBar extends Component {
         icon={<Icon>home</Icon>}
  
         key={1} href='/' />]
+=======
+  let navBarItems = [<NavItem key={1} href='/'> Home</NavItem>]
+>>>>>>> 48c5aad302b2b9022a700a3e612a5063b034b7a2
     if (this.props.isLoggedIn) {
       navBarItems.push(
         <Link to='/logout'> <Button
