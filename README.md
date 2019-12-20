@@ -78,8 +78,6 @@ To provide a way to organize your thoughts and stay on top of daily self care.
 
 *Materialize*
 
-* *
-
 
 
 
