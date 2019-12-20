@@ -19,18 +19,21 @@ class Journal extends Component {
     let newJournal = {
       title: this.state.title,
       entry: this.state.entry,
-      data: this.state.date
+      date: this.state.date
+    
     }
 
     this.props.addNewJournal(newJournal)
   }
 
   render() {
-    console.log(this.state)
-    console.log("on the journal page")
-    console.log(this.props.userJournals)
     let userJournals = this.props.userJournals.map((userJournal =>{
-      return  <div key={userJournal._id}>{userJournal.entry}</div>
+      return  <div key={userJournal._id}>
+        <h5>{userJournal.date}</h5>
+        <p>{userJournal.title}</p>
+        <p>{userJournal.entry}</p>
+        <hr />
+        </div>
     }))
     return (
       <div>
@@ -38,24 +41,17 @@ class Journal extends Component {
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>Title</label>
-            <input type='text' name='title' onChange={this.handleChange}/>
+            <input type='text' name='title' onChange={this.handleChange} required/>
           </div>
           <div>
             <label>Enter Text Here</label>
-            <input type='text' name='entry' onChange={this.handleChange} />
+            <input type='text' name='entry' onChange={this.handleChange} required/>
           </div>
-          <div className='form-group'>
-            <input
-              type='date'
-              placeholder='Date'
-              name='date'
-              className='form-control'
-                    // value={this.state.date}
-                    // onChange={this.onChange}
-                    onChange={this.handleChange}
-                  />
-                </div>
-          <input value='Submit' type='submit' />
+          <div>
+            <label>Date</label>
+            <input type='date' name='date' onChange={this.handleChange} required/>
+          </div>
+          <input value='Submit' type='submit'/>
         </form>
         {userJournals}
         </div>

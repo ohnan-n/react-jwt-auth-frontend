@@ -9,15 +9,14 @@ class NavBar extends Component {
     if (this.props.isLoggedIn) {
       navBarItems.push(<NavItem key={2} href='/logout'>Log Out</NavItem>)
       if (this.props.user != null) {
-        navBarItems.push(<NavItem key={5} href='/profile'>{this.props.user.email}</NavItem>)
+        navBarItems.push(<NavItem key={5} href='/profile'>{this.props.user.username}</NavItem>)
       }
-
     } else {
       navBarItems.push(<NavItem key={3} href='/signup'>Sign Up</NavItem>)
       navBarItems.push(<NavItem key={4} href='/login'>Log In</NavItem>)
     }
     return (
-      <Navbar brand='Be Mindful' className='nav' right>
+      <Navbar brand='' className='nav' right>
 
         {navBarItems}
       </Navbar>

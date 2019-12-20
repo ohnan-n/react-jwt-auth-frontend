@@ -20,10 +20,10 @@ class Profile extends Component {
     }
     this.props.history.replace(location)
   }
-  sendToCalendar= e => {
+  sendToReminder= e => {
     e.preventDefault()
     const location = {
-      pathname: '/calendar'
+      pathname: '/reminder'
     }
     this.props.history.replace(location)
   }
@@ -36,7 +36,7 @@ class Profile extends Component {
           <h4> Welcome, {this.props.user.username} </h4>
           <div>
           <button onClick={e => {this.sendToJournal(e)}}><i className="large material-icons">book</i></button>
-          <button onClick={e => {this.sendToCalendar(e)}}><i className="large material-icons">event_note</i></button>
+          <button onClick={e => {this.sendToReminder(e)}}><i className="large material-icons">event_note</i></button>
           <button onClick={e => {this.sendToMood(e)}}> <i className="large material-icons">mood</i></button>
           </div>
         </div>

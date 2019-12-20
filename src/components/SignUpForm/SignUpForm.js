@@ -19,7 +19,7 @@ class SignUpForm extends Component {
           </div>
           <div className="regPass">
             <label htmlFor='password'>Password</label>
-            <input id="passInput" type='text' name='password' onChange={this.props.handleInput} />
+            <input id="passInput" type='password' name='password' onChange={this.props.handleInput} />
           </div>
           <input value='Submit' type='submit' onClick={this.props.handleSignUp} />
         </form>

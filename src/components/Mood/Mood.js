@@ -1,113 +1,85 @@
-import React from 'react';
-import './Mood.css';
-import PropTypes from 'prop-types';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Slider from '@material-ui/core/Slider';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
+import React, { Component } from 'react'
+import './Mood.css'
+import EmojiRating from 'react-emoji-rating'
+import { withRouter } from 'react-router-dom'
 
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: 300 + theme.spacing(3) * 2,
-  },
-  margin: {
-    height: theme.spacing(3),
-  },
-}));
 
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
 
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
+class Mood extends Component {
+
+  state = {
+
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+
+    let newMood = {
+      mood: this.state.mood,
+      sleep: this.state.sleep,
+      anxiety: this.state.anxiety
+    
+    }
+
+    this.props.addNewMood(newMood)
+  }
+
+  render() {
+    // let userMoods = this.props.userMoods.map((userMood =>{
+    //   return  <div key={userMood._id}>
+    //     <h5>{userMood.mood}</h5>
+    //     <p>{userMood.sleep}</p>
+    //     <p>{userMood.anxiety}</p>
+    //     <hr />
+    //     </div>
+    // }))
+    console.log(this.props)
+    if (this.props.user != null) {
+      return (
+      <div>
+        <form>
+        <h4> Whats the vibes, {this.props.user.username}??</h4>
+       <div>
+        <h5>
+        How are you feeling today?
+        </h5>
+        </div>
+        <div className= "moodRating">
+        <EmojiRating 
+          variant='blobs'
+          onChange={this.handleRating} /> 
+      </div>
+      <div>
+        <p>
+        How many hours of sleep did you get?
+        <input type="number" min="1" max="100"/>
+        </p>
+      </div>
+        <div>
+        <p>
+        Rate you anxiety level.
+        <input type="number" min="1" max="100"/>
+        </p>
+        </div>
+        <input value='Submit' type='submit'/>
+        </form>
+        {/* {userMoods} */}
+        </div>
+      )
+    } else {
+      return (
+        <div>
+        </div>
+      )
+    }
+  }
+
 }
-
-ValueLabelComponent.propTypes = {
-  children: PropTypes.element.isRequired,
-  open: PropTypes.bool.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-const moodBoxShadow =
-  '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
-
-const marks = [
-  {
-    value: 0,
-  },
-  {
-    value: 20,
-  },
-  {
-    value: 37,
-  },
-  {
-    value: 100,
-  },
-];
-
-const moodSlider = withStyles({
-  root: {
-    color: '#3880ff',
-    height: 2,
-    padding: '15px 0',
-  },
-  thumb: {
-    height: 28,
-    width: 28,
-    backgroundColor: '#fff',
-    boxShadow: moodBoxShadow,
-    marginTop: -14,
-    marginLeft: -14,
-    '&:focus,&:hover,&$active': {
-      boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        boxShadow: moodBoxShadow,
-      },
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: 'calc(-50% + 11px)',
-    top: -22,
-    '& *': {
-      background: 'transparent',
-      color: '#000',
-    },
-  },
-  track: {
-    height: 2,
-  },
-  rail: {
-    height: 2,
-    opacity: 0.5,
-    backgroundColor: '#bfbfbf',
-  },
-  mark: {
-    backgroundColor: '#bfbfbf',
-    height: 8,
-    width: 1,
-    marginTop: -3,
-  },
-  markActive: {
-    opacity: 1,
-    backgroundColor: 'currentColor',
-  },
-})(Slider);
-
-export default function CustomizedSlider() {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Typography gutterBottom>Mood Scale</Typography>
-      <moodSlider aria-label="ios slider" defaultValue={60} marks={marks} valueLabelDisplay="on" />
-      <div className={classes.margin} />
-    </div>
-  );
-}
+export default withRouter(Mood)

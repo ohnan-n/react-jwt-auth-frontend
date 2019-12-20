@@ -5,16 +5,14 @@ import {
   withRouter
 } from 'react-router-dom'
 import axios from 'axios'
-
 import NavBar from '../NavBar/NavBar'
 import SignUpForm from '../SignUpForm/SignUpForm'
 import LogInForm from '../LogInForm/LogInForm'
 import LogOut from '../LogOut/LogOut'
 import Profile from '../Profile/Profile'
 import Journal from '../Journal/Journal'
-import Calendar from '../Calendar/Cal'
+import Reminder from '../Reminder/Reminder'
 import Mood from '../Mood/Mood'
-
 import './App.css'
 
 const databaseUrl = process.env.NODE_ENV === 'production' ? process.env.BACKEND_APP_URL : 'http://localhost:3000'
@@ -32,40 +30,22 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.token) {
       this.setState({
-        isLoggedIn: true
+        isLoggedIn: true,
+        user: JSON.parse(localStorage.user)
       })
+      this.getJournal()
     } else {
       this.setState({
         isLoggedIn: false
       })
     }
-    // if (localStorage.token) {
-    //   axios(
-    //     {
-    //       method: 'post',
-    //       url: `${databaseUrl}/api/users`,
-    //       headers: { Authorization: `Bearer ${localStorage.token}` }
-    //     })
-    //     .then(response => {
-    //       this.setState({
-    //         isLoggedIn: true,
-    //         user: response.data.user
-    //       })
-    //       this.props.history.push('/profile')
-    //     })
-    //     .catch(err => console.log(err))
-    // } else {
-    //   this.setState({
-    //     isLoggedIn: false
-    //   })
-    // }
+
   }
 
-  addNewJournal = journal => {
-
-    console.log(journal)
+  addNewJournal = (journal) => {
+  
+    console.log('ADD NEW JOURNAL', journal)
     let user = JSON.parse(window.localStorage.user)
-    console.log(user)
     journal.user = user._id
 
     axios({
@@ -74,7 +54,7 @@ class App extends Component {
       data: journal
     })
     .then(response => { 
-      console.log(response)
+      console.log('ADD NEW JOURNAL RES', response)
       this.getJournal()
     })
     .catch(error => {
@@ -82,14 +62,50 @@ class App extends Component {
     })
   }
 
-  getJournal = journalEntries => {
+  getJournal = () => {
     console.log('getJournal')
     axios({
-      url: `${databaseUrl}/api/journals`,
+      url: `${databaseUrl}/api/journals/${JSON.parse(localStorage.user)._id}`,
       method: 'GET'
     })
     .then(userJournals => {
+      console.log('getJournal RES', userJournals);
       this.setState({ userJournals: userJournals.data})
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  addNewReminder = (reminder) => {
+
+    console.log('ADD NEW REMINDERS', reminder)
+    let user = JSON.parse(window.localStorage.user)
+    reminder.user = user._id
+
+    axios({
+      url: `${databaseUrl}/api/reminders`,
+      method: 'POST',
+      data: reminder
+    })
+    .then(response => { 
+      console.log('ADD NEW REMINDERS', reminder)
+      this.getReminder()
+    })
+    .catch(error => {
+      console.log(error.response)
+    })
+  }
+
+  getReminder = () => {
+    console.log('getReminder')
+    axios({
+      url: `${databaseUrl}/api/reminder/${JSON.parse(localStorage.user)._id}`,
+      method: 'GET'
+    })
+    .then(userReminders => {
+      console.log('getReminder RES', userReminders);
+      this.setState({ userJournals: userReminders.data})
     })
     .catch(error => {
       console.log(error)
@@ -170,7 +186,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className = "main">
         <NavBar isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
@@ -214,14 +229,14 @@ class App extends Component {
             <Route path='/mood'
               render={(props) => {
                 return (
-                  <Mood isLoggedIn={this.state.isLoggedIn} user={this.state.user}/>
-                )
-              }}
+                  <Mood isLoggedIn={this.state.isLoggedIn} user={this.state.user} />
+                // addNewMood={this.addNewMood} userMoods={this.state.userMoods}
+                )}}
             />
-            <Route path='/calendar'
+            <Route path='/reminder'
               render={(props) => {
                 return (
-                  <Calendar isLoggedIn={this.state.isLoggedIn} user={this.state.user}/>
+                  <Reminder isLoggedIn={this.state.isLoggedIn} user={this.state.user} addNewReminder={this.addNewReminder} userReminders={this.state.userReminders}/>
                 )
               }}
             />
