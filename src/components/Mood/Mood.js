@@ -3,9 +3,6 @@ import './Mood.css'
 import EmojiRating from 'react-emoji-rating'
 import { withRouter } from 'react-router-dom'
 
-
-
-
 class Mood extends Component {
 
   state = {
@@ -83,3 +80,4 @@ class Mood extends Component {
 
 }
 export default withRouter(Mood)
+

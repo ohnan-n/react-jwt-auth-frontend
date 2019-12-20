@@ -1,0 +1,12 @@
+.card-panel {
+    position: absolute;
+    left: 45%;
+    right: 10%;
+    border-radius: 80%;
+    background-color: transparent;
+    opacity: .8;
+}
+
+.login{
+    color: #311b92;
+}

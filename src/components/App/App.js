@@ -10,6 +10,7 @@ import SignUpForm from '../SignUpForm/SignUpForm'
 import LogInForm from '../LogInForm/LogInForm'
 import LogOut from '../LogOut/LogOut'
 import Profile from '../Profile/Profile'
+import Slime from '../Slime/Slime'
 import Journal from '../Journal/Journal'
 import Reminder from '../Reminder/Reminder'
 import Mood from '../Mood/Mood'
@@ -242,6 +243,9 @@ class App extends Component {
             />
           </Switch>
         </div>
+      <div className='slime'> 
+        <Slime /> 
+      </div>
       </div>
     )
   }
